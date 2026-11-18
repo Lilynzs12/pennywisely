@@ -1,0 +1,86 @@
+/* base.css - colours, fonts and basic styles */
+
+/* Colours and sizes */
+:root {
+  /* brand */
+  --ink: #0b3b3c;         /* dark teal */
+  --ink-2: #0f5257;
+  --mint: #1fa37a;        /* green */
+  --mint-soft: #e6f6f0;
+  --gold: #d4a62a;        /* gold */
+  --bad: #d64545;
+  --blue: #0d6efd;
+
+  /* surfaces */
+  --bg: #f2f6f5;
+  --card: #ffffff;
+  --line: #e2eae8;
+  --muted: #62767a;
+  --text: #12292b;
+
+  /* depth */
+  --shadow: 0 1px 2px rgba(11, 59, 60, .05), 0 8px 24px -12px rgba(11, 59, 60, .16);
+  --shadow-lg: 0 2px 4px rgba(11, 59, 60, .06), 0 18px 36px -16px rgba(11, 59, 60, .28);
+  --radius: 16px;
+
+  /* sizing */
+  --rail: 80px;           /* small sidebar width */
+  --side: 260px;          /* open sidebar width */
+  --gutter: 1rem;         /* page padding */
+
+  /* make Bootstrap use my colours */
+  --bs-body-font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --bs-body-bg: var(--bg);
+  --bs-body-color: var(--text);
+}
+[data-bs-theme="dark"] {
+  --bg: #0a1718;
+  --card: #10262a;
+  --line: #1d3a3e;
+  --muted: #8fa7ab;
+  --text: #e5efee;
+  --mint-soft: #0f3a2e;
+  --ink: #071f21;
+}
+
+/* Page defaults */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: radial-gradient(900px 380px at 100% 0, rgba(31, 163, 122, .08), transparent 70%), var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  overflow-x: clip;                     /* clip so sticky still works */
+  -webkit-font-smoothing: antialiased;
+}
+img, svg, canvas { max-width: 100%; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-thumb { background: #b8cac8; border-radius: 8px; }
+
+/* Typography */
+h1, h2, h3, h4, h5, .brand { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -.02em; font-weight: 700; }
+h1 { font-size: clamp(1.35rem, 4.5vw, 1.75rem); }
+h2 { font-size: 1.05rem; }
+p { margin-top: 0; }
+.num, td, li b, .kpi .value, .nw-value { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.text-secondary { color: var(--muted) !important; }
+a { text-underline-offset: 2px; }
+
+/* Utilities (only what the pages need; Bootstrap supplies the rest) */
+.nowrap { white-space: nowrap; }
+.wrap-any { overflow-wrap: anywhere; min-width: 0; }
+.flex-none { flex: none; }
+.skip-link { position: absolute; left: -999px; top: 8px; z-index: 3000; background: var(--gold); color: var(--ink); padding: .5rem 1rem; border-radius: 8px; font-weight: 700; }
+.skip-link:focus { left: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+@media print {
+  .sidebar, .topbar, .bottom-nav, footer, .no-print { display: none !important; }
+  .page { padding: 0 !important; }
+  .card { break-inside: avoid; box-shadow: none; }
+}

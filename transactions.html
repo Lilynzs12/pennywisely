@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Transactions | Pennywisely</title>
+<meta name="description" content="Search, filter and export every ringgit that came in or went out.">
+<meta name="author" content="Pennywisely">
+<meta name="keywords" content="money tracker, budget, expenses, savings, personal finance">
+<meta name="theme-color" content="#0b3b3c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='10'%20fill='%230b3b3c'/%3E%3Cpath%20d='M13%2031V9h7.5a7.5%207.5%200%200%201%200%2015H13'%20fill='none'%20stroke='%23fff'%20stroke-width='3.2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='20.5'%20cy='16.5'%20r='2.4'%20fill='%23d4a62a'/%3E%3C/svg%3E">
+<!-- Google font, Bootstrap and icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<!-- Link my css files -->
+<link href="assets/css/base.css" rel="stylesheet">
+<link href="assets/css/layout.css" rel="stylesheet">
+<link href="assets/css/components.css" rel="stylesheet">
+<link href="assets/css/pages.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+</head>
+<body data-page="transactions">
+<!-- Sidebar, top bar and footer (made in core.js so all pages use the same menu) -->
+<div class="app">
+  <aside id="nav"></aside>
+  <div class="content">
+    <header id="top" class="topbar"></header>
+    <main class="page" id="main">
+      <!-- Page title and button -->
+      <div class="page-head"><div><h1>Transactions</h1><p>Search, filter and export every ringgit that came in or went out.</p></div><div class="actions"><button class="btn btn-outline-secondary" id="exportBtn"><i class="bi bi-download me-1"></i>Export CSV</button><button class="btn btn-ink" data-bs-toggle="modal" data-bs-target="#txModal"><i class="bi bi-plus-lg me-1"></i>Add</button></div></div>
+      <!-- Total income and expenses -->
+      <section class="sum-strip mb-3" aria-label="Totals">
+        <div class="card"><div class="label">Money in</div><div class="v text-success" id="sumIn"></div></div>
+        <div class="card"><div class="label">Money out</div><div class="v" id="sumOut"></div></div>
+        <div class="card"><div class="label">Net</div><div class="v" id="sumNet"></div></div>
+        <div class="card"><div class="label">Transactions</div><div class="v" id="sumCount"></div></div>
+      </section>
+      <!-- Search and filter -->
+      <section class="filters mb-3" aria-label="Filters">
+        <div class="search"><label class="visually-hidden" for="fSearch">Search</label><input class="form-control" id="fSearch" type="search" placeholder="Search description…  (press /)"></div>
+        <div><label class="visually-hidden" for="fCat">Category</label><select class="form-select" id="fCat"><option value="">All categories</option></select></div>
+        <div><label class="visually-hidden" for="fType">Type</label><select class="form-select" id="fType"><option value="">Income &amp; expense</option><option value="in">Income</option><option value="out">Expense</option></select></div>
+        <div><label class="visually-hidden" for="fSort">Sort</label><select class="form-select" id="fSort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="hi">Highest amount</option><option value="lo">Lowest amount</option></select></div>
+      </section>
+      <!-- Transactions table -->
+      <section class="card" id="txCard" aria-label="Transactions">
+        <div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Date</th><th>Description</th><th class="d-none d-md-table-cell">Category</th><th class="d-none d-lg-table-cell">Method</th><th class="text-end">Amount</th></tr></thead><tbody id="txBody"></tbody></table></div>
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-3"><span class="small text-secondary" id="pgInfo"></span><nav aria-label="Pages"><ul class="pagination mb-0" id="pager"></ul></nav><button class="btn btn-sm btn-link" id="clearFilters">Clear filters</button></div>
+      </section>
+    </main>
+    <footer id="foot" class="pw-foot"></footer>
+  </div>
+</div>
+<!-- Bootstrap and Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<!-- My javascript files -->
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/pages/transactions.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Debts &amp; Loans | Pennywisely</title>
+<meta name="description" content="Track loans and cards and plan the fastest way to be debt-free.">
+<meta name="author" content="Pennywisely">
+<meta name="keywords" content="money tracker, budget, expenses, savings, personal finance">
+<meta name="theme-color" content="#0b3b3c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='10'%20fill='%230b3b3c'/%3E%3Cpath%20d='M13%2031V9h7.5a7.5%207.5%200%200%201%200%2015H13'%20fill='none'%20stroke='%23fff'%20stroke-width='3.2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='20.5'%20cy='16.5'%20r='2.4'%20fill='%23d4a62a'/%3E%3C/svg%3E">
+<!-- Google font, Bootstrap and icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<!-- Link my css files -->
+<link href="assets/css/base.css" rel="stylesheet">
+<link href="assets/css/layout.css" rel="stylesheet">
+<link href="assets/css/components.css" rel="stylesheet">
+<link href="assets/css/pages.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+</head>
+<body data-page="debts">
+<!-- Sidebar, top bar and footer (made in core.js so all pages use the same menu) -->
+<div class="app">
+  <aside id="nav"></aside>
+  <div class="content">
+    <header id="top" class="topbar"></header>
+    <main class="page" id="main">
+      <!-- Page title and button -->
+      <div class="page-head"><div><h1>Debts &amp; Loans</h1><p>Know what you owe and find the fastest way to be debt-free.</p></div><div class="actions"><button class="btn btn-outline-secondary" id="payBtn"><i class="bi bi-cash-coin me-1"></i>Record payment</button><button class="btn btn-ink" data-bs-toggle="modal" data-bs-target="#debtModal"><i class="bi bi-plus-lg me-1"></i>Add debt</button></div></div>
+      <!-- Debt summary boxes -->
+      <section class="grid kpis" id="dKpis" aria-label="Debt summary"></section>
+      <!-- Payoff planner -->
+      <section class="grid split split-5-7" aria-label="Payoff planner">
+        <div class="card"><div class="card-head"><div><h2>Payoff planner</h2><p>See how extra payments change your debt-free date</p></div></div>
+          <label class="form-label fw-semibold d-flex justify-content-between" for="xtra"><span>Extra payment per month</span><span id="xtraVal" class="text-primary">RM 0.00</span></label>
+          <input type="range" class="form-range" id="xtra" min="0" max="1500" step="50" value="300">
+          <div class="btn-group seg w-100 mt-3" role="group" aria-label="Strategy"><button class="btn btn-outline-secondary active" data-strat="av">Avalanche</button><button class="btn btn-outline-secondary" data-strat="sn">Snowball</button></div>
+          <p class="small text-secondary mt-2" id="stratNote"></p>
+          <div class="form-check form-switch mb-3"><input class="form-check-input" type="checkbox" id="roll" checked><label class="form-check-label" for="roll">Roll paid-off payments into the next debt</label></div>
+          <div class="plan-strip" id="plan"></div></div>
+        <div class="card"><div class="card-head"><div><h2>Total debt over time</h2><p>Your current payments vs the plan</p></div></div><div class="chart-box"><canvas id="payoffChart" role="img" aria-label="Total debt balance over time"></canvas></div></div>
+      </section>
+      <!-- List of debts -->
+      <div class="section-title"><h2>Your debts</h2></div>
+      <!-- Your debts -->
+      <section class="grid cards" id="dGrid" aria-label="Your debts"></section>
+      <!-- Debt charts -->
+      <section class="grid split split-1-1-lg" aria-label="Breakdown">
+        <div class="card"><div class="card-head"><div><h2>Principal vs interest</h2><p>What you still owe, and what it costs on the plan</p></div></div><div class="chart-box sm"><canvas id="splitChart" role="img" aria-label="Principal versus interest by debt"></canvas></div></div>
+        <div class="card"><div class="card-head"><div><h2>Payoff order</h2><p>When each debt is cleared on the plan</p></div></div><ol class="list" id="order"></ol></div>
+      </section>
+    </main>
+    <footer id="foot" class="pw-foot"></footer>
+  </div>
+</div>
+<!-- Modal: record payment -->
+<div class="modal fade" id="payModal" tabindex="-1" aria-labelledby="pTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" id="payForm" novalidate>
+  <div class="modal-header"><h5 class="modal-title" id="pTitle">Record payment</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+  <div class="modal-body form-grid"><div id="pErr" class="alert alert-danger py-2 d-none mb-0" role="alert"></div>
+    <div><label class="form-label fw-semibold" for="pDebt">Debt</label><select class="form-select" id="pDebt"></select></div>
+    <div><label class="form-label fw-semibold" for="pAmt">Amount paid (RM)</label><input class="form-control" id="pAmt" type="number" min="0.01" step="0.01" inputmode="decimal"></div></div>
+  <div class="modal-footer"><button class="btn btn-ink" type="submit">Save payment</button></div></form></div></div>
+<!-- Modal: add debt -->
+<div class="modal fade" id="debtModal" tabindex="-1" aria-labelledby="dTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" id="debtForm" novalidate>
+  <div class="modal-header"><h5 class="modal-title" id="dTitle">Add debt</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+  <div class="modal-body form-grid two"><div id="dErr" class="alert alert-danger py-2 d-none mb-0 span-2" role="alert"></div>
+    <div class="span-2"><label class="form-label fw-semibold" for="dName">Name</label><input class="form-control" id="dName" maxlength="40" placeholder="e.g. Personal loan"></div>
+    <div><label class="form-label fw-semibold" for="dType">Type</label><select class="form-select" id="dType"></select></div>
+    <div><label class="form-label fw-semibold" for="dBal">Balance (RM)</label><input class="form-control" id="dBal" type="number" min="1" step="0.01" inputmode="decimal"></div>
+    <div><label class="form-label fw-semibold" for="dRate">Interest (% a year)</label><input class="form-control" id="dRate" type="number" min="0" max="60" step="0.1" value="0" inputmode="decimal"></div>
+    <div><label class="form-label fw-semibold" for="dPay">Monthly payment (RM)</label><input class="form-control" id="dPay" type="number" min="1" step="0.01" inputmode="decimal"></div></div>
+  <div class="modal-footer"><button class="btn btn-ink" type="submit">Add debt</button></div></form></div></div>
+<!-- Bootstrap and Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<!-- My javascript files -->
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/goal-art.js"></script>
+<script src="assets/js/pages/debts.js"></script>
+</body>
+</html>

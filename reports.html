@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reports | Pennywisely</title>
+<meta name="description" content="See how your income, spending and savings changed over time.">
+<meta name="author" content="Pennywisely">
+<meta name="keywords" content="money tracker, budget, expenses, savings, personal finance">
+<meta name="theme-color" content="#0b3b3c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='10'%20fill='%230b3b3c'/%3E%3Cpath%20d='M13%2031V9h7.5a7.5%207.5%200%200%201%200%2015H13'%20fill='none'%20stroke='%23fff'%20stroke-width='3.2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='20.5'%20cy='16.5'%20r='2.4'%20fill='%23d4a62a'/%3E%3C/svg%3E">
+<!-- Google font, Bootstrap and icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<!-- Link my css files -->
+<link href="assets/css/base.css" rel="stylesheet">
+<link href="assets/css/layout.css" rel="stylesheet">
+<link href="assets/css/components.css" rel="stylesheet">
+<link href="assets/css/pages.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+</head>
+<body data-page="reports">
+<!-- Sidebar, top bar and footer (made in core.js so all pages use the same menu) -->
+<div class="app">
+  <aside id="nav"></aside>
+  <div class="content">
+    <header id="top" class="topbar"></header>
+    <main class="page" id="main">
+      <!-- Page title and button -->
+      <div class="page-head"><div><h1>Reports</h1><p>See how your income, spending and savings changed over time.</p></div><div class="actions"><div class="btn-group seg" role="group" aria-label="Range"><button class="btn btn-outline-secondary" data-range="3">3 months</button><button class="btn btn-outline-secondary active" data-range="6">6 months</button></div><button class="btn btn-outline-secondary" id="csvBtn"><i class="bi bi-download me-1"></i>CSV</button><button class="btn btn-ink" id="printBtn"><i class="bi bi-printer me-1"></i>Print / PDF</button></div></div>
+      <!-- Highlights -->
+      <section class="grid cols-3" id="repKpis" aria-label="Highlights"></section>
+      <!-- Charts -->
+      <section class="grid split split-7-5" aria-label="Charts">
+        <div class="card"><div class="card-head"><h2>Spending by category</h2></div><div class="chart-box"><canvas id="stackChart" role="img" aria-label="Monthly spending by category"></canvas></div></div>
+        <div class="card"><div class="card-head"><h2>Savings rate</h2></div><div class="chart-box"><canvas id="rateChart" role="img" aria-label="Savings rate per month"></canvas></div></div>
+      </section>
+      <!-- Report tables -->
+      <section class="grid split split-7-5" aria-label="Report tables">
+        <div class="card"><div class="card-head"><h2>Monthly summary</h2></div><div class="table-responsive"><table class="table mb-0"><thead><tr><th>Month</th><th>Income</th><th>Expenses</th><th>Net</th><th class="text-end">Saved</th></tr></thead><tbody id="repBody"></tbody></table></div></div>
+        <div class="card"><div class="card-head"><h2>Biggest expenses this month</h2></div><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Item</th><th class="d-none d-sm-table-cell">Category</th><th class="text-end">Amount</th></tr></thead><tbody id="topBody"></tbody></table></div></div>
+      </section>
+      <!-- Reminders -->
+      <section class="card" id="pattern" aria-label="Reminders"></section>
+    </main>
+    <footer id="foot" class="pw-foot"></footer>
+  </div>
+</div>
+<!-- Bootstrap and Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<!-- My javascript files -->
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/pages/reports.js"></script>
+</body>
+</html>
