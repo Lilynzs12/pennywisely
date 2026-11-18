@@ -5,8 +5,8 @@
 
 | | |
 |---|---|
-| 🌐 **Live Website (GitHub Pages)** | https://[username].github.io/[projectname]/ |
-| 📁 **GitHub Repository** | https://github.com/[username]/[projectname] |
+| 🌐 **Live Website (GitHub Pages)** | https://lilynzs12.github.io/pennywisely/ |
+| 📁 **GitHub Repository** | https://github.com/Lilynzs12/pennywisely.git  |
 
 ---
 
