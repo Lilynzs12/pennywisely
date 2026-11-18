@@ -1,7 +1,7 @@
 # Pennywisely – Personal Money Tracker
 
 > **IMS566 Advanced Web Design Development and Content Management – Individual Project**
-> **Student:** [Your Name] | **Student ID:** [Your ID] | **Group/Class:** [Your Class]
+> **Student:** ANIS AMIRA BINTI HAMDAN | **Student ID:** 2025379645 | **Group/Class:** CDIM2624ST1
 
 | | |
 |---|---|
